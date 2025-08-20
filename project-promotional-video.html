@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotional Video Production - Jubayer Hossen Rifat</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Light Theme (default) */
+        body.light-theme {
+            background-color: #f3f4f6; /* Light gray background */
+            color: #333;
+        }
+        body.light-theme .section-bg-light {
+            background-color: #ffffff;
+        }
+        body.light-theme .text-adaptive {
+            color: #1f2937;
+        }
+        body.light-theme .bg-adaptive {
+            background-color: #ffffff;
+        }
+        body.light-theme .border-adaptive {
+            border-color: #e5e7eb;
+        }
+        
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+        }
+        body.dark-theme .section-bg-light {
+            background-color: #2d3748;
+        }
+        body.dark-theme .text-adaptive {
+            color: #e2e8f0;
+        }
+        body.dark-theme .bg-adaptive {
+            background-color: #2d3748;
+        }
+        body.dark-theme .border-adaptive {
+            border-color: #4a5568;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="antialiased light-theme">
+
+    <!-- Header/Navigation -->
+    <header class="bg-white section-bg-light shadow-md py-4 px-6 md:px-12 fixed w-full z-20">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition duration-300 text-adaptive">Jubayer Hossen <span class="text-blue-600">Rifat</span></a>
+            <a href="index.html#projects" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Projects
+            </a>
+            <div class="flex items-center space-x-4">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 section-bg-light text-adaptive">
+                    <i class="fas fa-moon text-lg" id="theme-icon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="pt-24 pb-16 px-6 md:px-12">
+        <div class="container mx-auto">
+            <h1 class="text-5xl font-extrabold text-center mb-8 text-adaptive">Promotional Video Production</h1>
+            <p class="text-xl text-center text-gray-600 mb-12 text-adaptive">
+                Editing and post-production of a short promotional video for a local business.
+            </p>
+
+            <!-- Video Player Section -->
+            <div class="w-full max-w-4xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-adaptive">Project Video Showcase</h2>
+                <p class="text-lg text-gray-600 mb-6 text-adaptive">
+                    Watch the final promotional videos that were edited and produced for the client.
+                </p>
+
+                <!-- First Video Player -->
+                <div class="relative w-full overflow-hidden rounded-lg shadow-xl mb-8" style="padding-top: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full" 
+                        src="https://www.youtube.com/embed/waxhJhZRNvw?si=W8sLSbs_a1nnoy5Z" title="
+
+                        title="Promotional Video 1" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                    ></iframe>
+                </div>
+
+                <!-- Horizontal Border Separator -->
+                <hr class="my-8 border-t border-adaptive">
+                
+                <!-- Second Video Player -->
+                <div class="relative w-full overflow-hidden rounded-lg shadow-xl mb-8" style="padding-top: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full" 
+                        src="https://www.youtube.com/embed/ANOTHER_VIDEO_ID_HERE"
+                        title="Promotional Video 2" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                
+                <!-- Horizontal Border Separator -->
+                <hr class="my-8 border-t border-adaptive">
+
+                <!-- Third Video Player -->
+                <div class="relative w-full overflow-hidden rounded-lg shadow-xl mb-8" style="padding-top: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full" 
+                        src="https://www.youtube.com/embed/YET_ANOTHER_VIDEO_ID_HERE"
+                        title="Promotional Video 3" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                    ></iframe>
+                </div>
+
+                <!-- Horizontal Border Separator -->
+                <hr class="my-8 border-t border-adaptive">
+
+                <!-- Fourth Video Player -->
+                <div class="relative w-full overflow-hidden rounded-lg shadow-xl" style="padding-top: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full" 
+                        src="https://www.youtube.com/embed/AND_ANOTHER_VIDEO_ID_HERE"
+                        title="Promotional Video 4" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                    ></iframe>
+                </div>
+
+            </div>
+            
+            <div class="bg-adaptive rounded-lg shadow-lg p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Project Details -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-blue-600 mb-6">Project Overview</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-6 text-adaptive">
+                            This project involved the full post-production workflow for a promotional video. Starting with raw footage, I handled video trimming, color grading, audio mixing, and adding motion graphics to create a polished and engaging final product. The goal was to produce a high-quality video that effectively communicates the client's brand message to their target audience.
+                        </p>
+                        <ul class="space-y-4 text-gray-700 text-lg text-adaptive">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Client: Local Business</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Timeline: 2 Weeks</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Role: Video Editor, Post-Production Specialist</li>
+                        </ul>
+                    </div>
+
+                    <!-- Software & Tools Used -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-blue-600 mb-6">Tools Used</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg text-center border border-adaptive">
+                                <!-- Adobe Premiere Pro Logo -->
+                                <img src="images/adobe-premiere-logo.png" alt="Adobe Premiere Pro Logo" class="w-16 h-16 mx-auto mb-3">
+                                <h4 class="text-xl font-semibold text-adaptive">Adobe Premiere Pro</h4>
+                                <p class="text-gray-600 text-adaptive">Primary editing software</p>
+                            </div>
+                            <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg text-center border border-adaptive">
+                                <!-- Adobe After Effects Logo -->
+                                <img src="images/adobe-after-effects-logo.png" alt="Adobe After Effects Logo" class="w-16 h-16 mx-auto mb-3">
+                                <h4 class="text-xl font-semibold text-adaptive">Adobe After Effects</h4>
+                                <p class="text-gray-600 text-adaptive">Motion graphics & effects</p>
+                            </div>
+                            <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg text-center border border-adaptive">
+                                <!-- Adobe Audition Logo -->
+                                <img src="images/adobe-audition-logo.png" alt="Adobe Audition Logo" class="w-16 h-16 mx-auto mb-3">
+                                <h4 class="text-xl font-semibold text-adaptive">Adobe Audition</h4>
+                                <p class="text-gray-600 text-adaptive">Advanced audio mixing</p>
+                            </div>
+                            <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg text-center border border-adaptive">
+                                <i class="fas fa-photo-video text-5xl text-yellow-500 mb-3"></i>
+                                <h4 class="text-xl font-semibold text-adaptive">Visual Storytelling</h4>
+                                <p class="text-gray-600 text-adaptive">Narrative & pacing</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-8 px-6 md:px-12 text-center text-adaptive">
+        <p class="text-white">&copy; <span id="current-year"></span> Jubayer Hossen Rifat. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light-theme';
+        body.classList.add(savedTheme);
+        if (savedTheme === 'dark-theme') {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark-theme');
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light-theme');
+            }
+        });
+    </script>
+</body>
+</html>
