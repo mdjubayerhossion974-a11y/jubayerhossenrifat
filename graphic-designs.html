@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Graphic Designs - Jubayer Hossen Rifat</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Light Theme (default) */
+        body.light-theme {
+            background-color: #f3f4f6; /* Light gray background */
+            color: #333;
+        }
+        body.light-theme .section-bg-light {
+            background-color: #ffffff;
+        }
+        body.light-theme .section-bg-dark {
+            background-color: #f9fafb;
+        }
+        body.light-theme .text-adaptive {
+            color: #1f2937;
+        }
+        body.light-theme .bg-adaptive {
+            background-color: #ffffff;
+        }
+        body.light-theme .border-adaptive {
+            border-color: #e5e7eb;
+        }
+        
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+        }
+        body.dark-theme .section-bg-light {
+            background-color: #2d3748;
+        }
+        body.dark-theme .section-bg-dark {
+            background-color: #1f2937;
+        }
+        body.dark-theme .text-adaptive {
+            color: #e2e8f0;
+        }
+        body.dark-theme .bg-adaptive {
+            background-color: #2d3748;
+        }
+        body.dark-theme .border-adaptive {
+            border-color: #4a5568;
+        }
+
+        /* Image Slider styles */
+        .slider-container {
+            position: relative;
+            max-width: 300px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .slider-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slider-slide {
+            min-width: 100%;
+            display: block;
+        }
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease;
+        }
+        .slider-button:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .slider-button.left {
+            left: 1rem;
+        }
+        .slider-button.right {
+            right: 1rem;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .dot.active {
+            background: #2563eb; /* Active dot color */
+        }
+    </style>
+</head>
+<body class="antialiased light-theme">
+
+    <!-- Header/Navigation -->
+    <header class="bg-white section-bg-light shadow-md py-4 px-6 md:px-12 fixed w-full z-20">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition duration-300 text-adaptive">Jubayer Hossen <span class="text-blue-600">Rifat</span></a>
+            <div class="space-x-4 hidden md:flex">
+                <a href="index.html#about" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">About</a>
+                <a href="index.html#projects" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Projects</a>
+                <a href="index.html#contact" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 section-bg-light text-adaptive">
+                    <i class="fas fa-moon text-lg" id="theme-icon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="pt-24 pb-16">
+        <section class="container mx-auto px-6 md:px-12 py-10 section-bg-light rounded-xl shadow-lg border border-adaptive text-adaptive">
+            <div class="text-center">
+                <a href="index.html" class="text-blue-600 hover:underline inline-flex items-center mb-6">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Projects
+                </a>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Graphic Design Portfolio</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">A collection of posters, social media posts, and digital art.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-12">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-3xl font-bold mb-4">Project Overview</h2>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        This project showcases my skills in creating compelling visual content for various digital and print media. My work includes designs for social media campaigns, event posters, and branded digital assets. I focus on creating designs that are not only aesthetically pleasing but also effectively communicate a message and engage the target audience.
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Each piece is a result of a thoughtful design process, from conceptualization and mood boarding to final execution. I use a combination of typography, color theory, and composition to bring ideas to life.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2">
+                    <img src="images/graphic design.jpg" alt="Graphic Design Showcase" class="w-full rounded-lg shadow-lg">
+                </div>
+            </div>
+
+            <hr class="my-12 border-gray-300 dark:border-gray-600">
+
+            <div class="flex flex-col md:flex-row justify-between mb-12">
+                <div class="mb-8 md:mb-0 md:w-1/3">
+                    <h3 class="text-2xl font-bold mb-4">Core Skills</h3>
+                    <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                        <li>Typography & Layout</li>
+                        <li>Color Theory</li>
+                        <li>Digital Illustration</li>
+                        <li>Photo Manipulation</li>
+                        <li>Branding & Identity</li>
+                    </ul>
+                </div>
+                <div class="md:w-1/3">
+                    <h3 class="text-2xl font-bold mb-4">Software Used</h3>
+                    <div class="flex flex-wrap items-center space-x-4">
+                        <img src="images/photoshop png.png" alt="Adobe Photoshop" class="w-12 h-12">
+                        <img src="images/adobe-illustrator-logo.png" alt="Adobe Illustrator" class="w-12 h-12">
+                        <img src="images/adobe-indesign-logo.png" alt="Adobe InDesign" class="w-12 h-12">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Image Slider Section -->
+            <h2 class="text-3xl font-bold text-center mb-8">My Work</h2>
+            <div class="slider-container">
+                <div class="slider-inner" id="slider-inner">
+                    <!-- Example Graphic 1 -->
+                    <div class="slider-slide">
+                        <img src="images/Thumbail Series - 1.jpg" alt="Poster Design Example 1" class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                    <!-- Example Graphic 2 -->
+                    <div class="slider-slide">
+                        <img src="images/Thumbail Series - 2.jpg" alt="Social Media Graphic Example 2" class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                    <!-- Example Graphic 3 -->
+                    <div class="slider-slide">
+                        <img src="images/CAR POSTER SERIES - 1.jpg" alt="Digital Art Piece 3" class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                    <!-- Example Graphic 4 -->
+                    <div class="slider-slide">
+                        <img src="images/CAR POSTER SERIES - 2.jpg" alt="Digital Art Piece 3" class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                    <!-- Example Graphic 5 -->
+                    <div class="slider-slide">
+                        <img src="images/CAR POSTER SERIES - 3.jpg" alt="Digital Art Piece 3" class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                    <!-- Example Graphic 6 -->
+                    <div class="slider-slide">
+                        <img src="images/FOOD POSTER SERIES - 2.jpg" alt="Digital Art Piece 3" class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                    <!-- Example Graphic 7 -->
+                    <div class="slider-slide">
+                        <img src="images/FOOD POSTER SERIES - 3.jpg" alt="Digital Art Piece 3" class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                    <!-- Example Graphic 8 -->
+                    <div class="slider-slide">
+                        <img src="images/Digital art.jpg" alt="Digital Art Piece 3" class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                    <!-- Example Graphic 9 -->
+                    <div class="slider-slide">
+                        <img src="images/grow on instagram.jpg" alt="Digital Art Piece 3" class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <button id="prev-button" class="slider-button left">
+                    <i class="fas fa-chevron-left text-2xl"></i>
+                </button>
+                <button id="next-button" class="slider-button right">
+                    <i class="fas fa-chevron-right text-2xl"></i>
+                </button>
+                <!-- Dot Navigation -->
+                <div id="dots-container" class="slider-dots"></div>
+            </div>
+            
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 px-6 md:px-12 text-center mt-12">
+        <p class="text-white">&copy; <span id="current-year-footer"></span> Jubayer Hossen Rifat. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year-footer').textContent = new Date().getFullYear();
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light-theme';
+        body.classList.add(savedTheme);
+        if (savedTheme === 'dark-theme') {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark-theme');
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light-theme');
+            }
+        });
+
+        // --- Image Slider Logic ---
+        const sliderInner = document.getElementById('slider-inner');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const dotsContainer = document.getElementById('dots-container');
+        const slides = document.querySelectorAll('.slider-slide');
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+
+        // Create navigation dots dynamically
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.setAttribute('data-index', index);
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlider() {
+            const offset = -currentIndex * 100;
+            sliderInner.style.transform = `translateX(${offset}%)`;
+
+            // Update active dot
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (dots[currentIndex]) {
+                dots[currentIndex].classList.add('active');
+            }
+        }
+
+        // Navigation
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        // Dot navigation
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                currentIndex = parseInt(e.target.dataset.index);
+                updateSlider();
+            });
+        });
+
+        // Touch swipe functionality
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        sliderInner.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        }, false);
+
+        sliderInner.addEventListener('touchmove', (e) => {
+            touchEndX = e.touches[0].clientX;
+        }, false);
+
+        sliderInner.addEventListener('touchend', () => {
+            const touchThreshold = 50; // Minimum distance to register a swipe
+            const diffX = touchStartX - touchEndX;
+
+            if (diffX > touchThreshold) {
+                // Swiped left
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+            } else if (diffX < -touchThreshold) {
+                // Swiped right
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            }
+        }, false);
+        
+        // Initial call to set up the slider
+        updateSlider();
+    </script>
+
+</body>
+</html>
