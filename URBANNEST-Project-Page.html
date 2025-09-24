@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: URBAN NEST - Jubayer Hossen Rifat</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Light Theme (default) */
+        body.light-theme {
+            background-color: #f3f4f6; /* Light gray background */
+            color: #333;
+        }
+        body.light-theme .section-bg-light {
+            background-color: #ffffff;
+        }
+        body.light-theme .section-bg-dark {
+            background-color: #f9fafb;
+        }
+        body.light-theme .text-adaptive {
+            color: #1f2937;
+        }
+        body.light-theme .bg-adaptive {
+            background-color: #ffffff;
+        }
+        body.light-theme .border-adaptive {
+            border-color: #e5e7eb;
+        }
+        
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+        }
+        body.dark-theme .section-bg-light {
+            background-color: #2d3748;
+        }
+        body.dark-theme .section-bg-dark {
+            background-color: #1f2937;
+        }
+        body.dark-theme .text-adaptive {
+            color: #e2e8f0;
+        }
+        body.dark-theme .bg-adaptive {
+            background-color: #2d3748;
+        }
+        body.dark-theme .border-adaptive {
+            border-color: #4a5568;
+        }
+
+        /* Image Gallery Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .modal-content img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: #f1f1f1;
+            cursor: pointer;
+            z-index: 101;
+        }
+        .prev-modal { left: 1rem; }
+        .next-modal { right: 1rem; }
+        .modal-nav:hover { color: #bbb; }
+    </style>
+</head>
+<body class="antialiased light-theme">
+
+    <!-- Header/Navigation -->
+    <header class="bg-white section-bg-light shadow-md py-4 px-6 md:px-12 fixed w-full z-20">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition duration-300 text-adaptive">Jubayer Hossen <span class="text-blue-600">Rifat</span></a>
+            <div class="space-x-4 hidden md:flex">
+                <a href="index.html#home" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Home</a>
+                <a href="index.html#about" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">About</a>
+                <a href="index.html#skills" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Skills</a>
+                <a href="index.html#projects" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Projects</a>
+                <a href="index.html#Testimonials" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Testimonials</a>
+                <a href="index.html#resume" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Resume</a>
+                <a href="index.html#contact" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 section-bg-light text-adaptive">
+                    <i class="fas fa-moon text-lg" id="theme-icon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="pt-24 pb-16">
+        <section class="container mx-auto px-6 md:px-12 py-10 section-bg-light rounded-xl shadow-lg border border-adaptive text-adaptive">
+            <!-- Centered Title Section -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-2">URBAN NEST: Brand Identity</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400">A comprehensive brand development project for a modern home decor company.</p>
+            </div>
+
+            <!-- Project Overview Section -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-center">Project Overview</h2>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto text-center">
+                    We created a full brand identity for URBAN NEST, a startup selling contemporary, minimalist home furnishings. The project included a new logo, typography, color palette, and marketing materials for both print and social media.
+                </p>
+            </div>
+
+            <hr class="my-12 border-gray-300 dark:border-gray-600">
+            
+            <!-- Brand Elements Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-12">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-2xl font-bold mb-4">Logo & Typography</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        The URBAN NEST logo combines a clean, modern wordmark with a subtle, geometric house icon. The design is minimal and versatile, working well across various applications from digital to print. The typography selection pairs a bold, contemporary sans-serif for headings with a clean, readable serif for body text.
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        The color palette of earthy tones and a pop of bright orange gives the brand a warm yet professional feel.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2">
+                    <img src="images/urbannest logo mockup.jpg" alt="URBAN NEST Logo Mockup" class="w-full rounded-lg shadow-lg mb-4">
+                    <img src="images/urbannest typography.jpg" alt="URBAN NEST Typography" class="w-full rounded-lg shadow-lg">
+                </div>
+            </div>
+
+            <hr class="my-12 border-gray-300 dark:border-gray-600">
+
+            <!-- Social Media & Stationery Showcase -->
+            <h2 class="text-3xl font-bold text-center mb-8">Campaign & Collateral</h2>
+            <p class="text-gray-700 dark:text-gray-300 text-center mb-8 leading-relaxed">
+                        Explore our campaign and collateral work, from detailed brand identity assets to a series of social media posts.
+                    </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest logo.jpg" alt="URBAN NEST Instagram Post" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:sofa instagram post.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/the stroy of urban nest.jpg" alt="URBAN NEST Instagram Post" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:sofa instagram post.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest color palette.jpg" alt="URBAN NEST Instagram Post" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:sofa instagram post.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest layout.jpg" alt="URBAN NEST Instagram Post" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:beds instagram post.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest page layout.jpg" alt="URBAN NEST Instagram Post" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:Chair instagram post.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest Stationery design.jpg" alt="URBAN NEST Instagram Post" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:Chair instagram post.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest instagram post - 1.jpg" alt="URBAN NEST Stationery Design" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:Stationery design.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest inatagram post - 2.jpg" alt="URBAN NEST Orange Logo" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:orange colored logo.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest inatagram post - 3.jpg" alt="URBAN NEST Poster Mockup" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:interior poster mockup.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest inatagram post - 4.jpg" alt="URBAN NEST Poster Mockup" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:interior poster mockup.jpg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/urbannest interior wall.jpg" alt="URBAN NEST Poster Mockup" class="w-full h-auto object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-src="uploaded:interior poster mockup.jpg">
+                </div>
+            </div>
+
+            <!-- The Modal/Lightbox -->
+            <div id="imageModal" class="modal">
+                <span class="close-btn">&times;</span>
+                <div class="modal-content">
+                    <img id="modalImage" src="" alt="">
+                    <a class="modal-nav prev-modal"><i class="fas fa-chevron-left"></i></a>
+                    <a class="modal-nav next-modal"><i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Skills and Software Section - Consistent with your other pages -->
+    <div class="container mx-auto px-6 md:px-12 mt-12 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center section-bg-light rounded-xl shadow-lg border border-adaptive text-adaptive p-10">
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Core Skills</h3>
+                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                    <li>Branding & Identity</li>
+                    <li>Logo Design</li>
+                    <li>Marketing Collateral</li>
+                    <li>Typography & Color Theory</li>
+                    <li>Digital Illustration</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Software Used</h3>
+                <div class="flex flex-wrap items-center space-x-4">
+                    <img src="images/photoshop png.png" alt="Adobe Photoshop" class="w-12 h-12">
+                    <img src="images/adobe-illustrator-logo.png" alt="Adobe Illustrator" class="w-12 h-12">
+                    <img src="images/adobe-indesign-logo.png" alt="Adobe InDesign" class="w-12 h-12">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Projects Button -->
+  <div class="text-center my-12">
+        <a href="index.html#projects" class="inline-flex items-center bg-blue-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:underline transition-colors duration-300">
+            <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+        </a>
+    </div> 
+
+    <!-- Main Footer -->
+    <footer class="bg-gray-800 py-8 px-6 md:px-12 text-center">
+        <p class="text-white">&copy; <span id="current-year-footer"></span> Jubayer Hossen Rifat. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year-footer').textContent = new Date().getFullYear();
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem('theme') || 'light-theme';
+        body.classList.add(savedTheme);
+        if (savedTheme === 'dark-theme') {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark-theme');
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light-theme');
+            }
+        });
+
+        // Gallery Modal Logic
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById("modalImage");
+        const closeBtn = document.getElementsByClassName("close-btn")[0];
+        const prevBtn = document.getElementsByClassName("prev-modal")[0];
+        const nextBtn = document.getElementsByClassName("next-modal")[0];
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        let currentImageIndex = 0;
+        const imageUrls = Array.from(galleryItems).map(item => item.dataset.src);
+
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                modal.style.display = "flex";
+                modalImg.src = item.dataset.src;
+                currentImageIndex = index;
+            });
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // Slider functionality within the modal
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
+            modalImg.src = imageUrls[currentImageIndex];
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
+            modalImg.src = imageUrls[currentImageIndex];
+        });
+        
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === "flex") {
+                if (e.key === "ArrowRight") {
+                    nextBtn.click();
+                } else if (e.key === "ArrowLeft") {
+                    prevBtn.click();
+                } else if (e.key === "Escape") {
+                    closeBtn.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
