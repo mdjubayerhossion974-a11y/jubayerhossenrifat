@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project: Residential Building Plan</title>
+    <title>Project: Graphic Designs - Jubayer Hossen Rifat</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Inter -->
@@ -27,7 +27,7 @@
             background-color: #f9fafb;
         }
         body.light-theme .text-adaptive {
-            color: #1f2937; /* Dark gray for text */
+            color: #1f2937;
         }
         body.light-theme .bg-adaptive {
             background-color: #ffffff;
@@ -35,10 +35,7 @@
         body.light-theme .border-adaptive {
             border-color: #e5e7eb;
         }
-        body.light-theme .shadow-adaptive {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
+        
         /* Dark Theme */
         body.dark-theme {
             background-color: #1a202c; /* Dark background */
@@ -48,10 +45,10 @@
             background-color: #2d3748;
         }
         body.dark-theme .section-bg-dark {
-            background-color: #1a202c;
+            background-color: #1f2937;
         }
         body.dark-theme .text-adaptive {
-            color: #e2e8f0; /* Light text for dark theme */
+            color: #e2e8f0;
         }
         body.dark-theme .bg-adaptive {
             background-color: #2d3748;
@@ -59,36 +56,76 @@
         body.dark-theme .border-adaptive {
             border-color: #4a5568;
         }
-        body.dark-theme .shadow-adaptive {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-        }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Image Slider styles - Reused for multiple sliders */
+        .slider-container {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
+        .slider-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
+        .slider-slide {
+            min-width: 100%;
+            display: block;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease;
+        }
+        .slider-button:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .slider-button.left {
+            left: 1rem;
+        }
+        .slider-button.right {
+            right: 1rem;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .dot.active {
+            background: #2563eb; /* Active dot color */
         }
     </style>
 </head>
 <body class="antialiased light-theme">
 
-        <!-- Header/Navigation -->
+    <!-- Header/Navigation -->
     <header class="bg-white section-bg-light shadow-md py-4 px-6 md:px-12 fixed w-full z-20">
         <nav class="container mx-auto flex justify-between items-center">
             <a href="index.html" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition duration-300 text-adaptive">Jubayer Hossen <span class="text-blue-600">Rifat</span></a>
             <div class="space-x-4 hidden md:flex">
                 <a href="index.html#home" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Home</a>
                 <a href="index.html#about" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">About</a>
+                <a href="index.html#experience" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Experience</a>
                 <a href="index.html#skills" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Skills</a>
                 <a href="index.html#projects" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Projects</a>
                 <a href="index.html#Testimonials" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Testimonials</a>
@@ -104,61 +141,170 @@
         </nav>
     </header>
 
-    <main class="pt-20 py-16 px-6 md:px-12 section-bg-light min-h-screen">
-        <div class="container mx-auto max-w-4xl">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-10 text-adaptive">Residential Building Plan</h1>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
-                <div class="md:col-span-2">
-                    <img src="images/autocaddesign.jpg" alt="Residential Building Plan Main Image" class="w-full rounded-lg shadow-xl object-cover h-96">
-                </div>
-                <!-- Add more project-specific images here -->
-                <img src="images/autocad_client_1.jpg" alt="AutoCAD Detail 1" class="w-full rounded-lg shadow-md object-cover h-64">
-                <img src="images/autocad_client_2.jpg" alt="AutoCAD Detail 2" class="w-full rounded-lg shadow-md object-cover h-64">
-                <img src="images/AUTOCAD 25t x 35ft G-floor plan.jpg" alt="AutoCAD Detail 2" class="w-full rounded-lg shadow-md object-cover h-100">
-                <img src="images/AUTOCAD 25t x 35ft Typical Floor plan.jpg" alt="AutoCAD Detail 2" class="w-full rounded-lg shadow-md object-cover h-100">
-                <img src="images/AUTOCAD GROUND FLOOR PLAN.jpg" alt="AutoCAD Detail 2" class="w-full rounded-lg shadow-md object-cover h-100">
-                <img src="images/AUTOCAD TYPICAL FLOOR PLAN.jpg " alt="AutoCAD Detail 2" class="w-full rounded-lg shadow-md object-cover h-100">
-                <img src="images/AUTOCAD FLOOR PLAN WITH COLUMN.jpg" alt="AutoCAD Detail 2" class="w-full rounded-lg shadow-md object-cover h-100">
-                <img src="images/AUTOCAD FLOOR PLAN WITH BEAM.jpg" alt="AutoCAD Detail 2" class="w-full rounded-lg shadow-md object-cover h-100">
-                <img src="images/AUTOCAD COLUMN LAYOUT.jpg" alt="AutoCAD Detail 2" class="w-full rounded-lg shadow-md object-cover h-100">
-                </div>
+    <main class="pt-24 pb-16">
+        <section class="container mx-auto px-6 md:px-12 py-10 section-bg-light rounded-xl shadow-lg border border-adaptive text-adaptive">
+            <!-- Centered Title Section -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Graphic Design Portfolio</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400">A collection of posters, social media posts, and digital art.</p>
             </div>
 
-            <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive text-adaptive mb-12">
-                <h2 class="text-3xl font-bold mb-6 text-blue-600">Project Details</h2>
-                <p class="text-lg leading-relaxed mb-6">
-                    This project showcases the intersection of technical expertise and creative vision for a critical and complicated land. The engineering solution demonstrates precision in structural analysis and design implementation with complete CAD documentation.
-                </p>
+            <!-- Project Sections - Each with its own slider -->
+            <div class="space-y-16">
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-6">
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-4 text-blue-600">Key Features</h3>
-                        <ul class="list-disc list-inside space-y-2 text-lg">
-                            <li>Structural integrity analysis</li>
-                            <li>Code compliance verification</li>
-                            <li>3D visualization and rendering</li>
-                            <li>Technical documentation</li>
-                        </ul>
+                <!-- Brand/Poster Designs Section -->
+                <div class="project-section">
+                    <h2 class="text-3xl font-bold mb-6 text-center">Poster Designs</h2>
+                    <div class="slider-container" id="slider-1">
+                        <div class="slider-inner">
+                            <div class="slider-slide">
+                                <img src="images/CAR POSTER SERIES - 1.jpg" alt="CAR POSTER SERIES - 1" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                            <div class="slider-slide">
+                                <img src="images/CAR POSTER SERIES - 2.jpg" alt="CAR POSTER SERIES - 2" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                            <div class="slider-slide">
+                                <img src="images/CAR POSTER SERIES - 3.jpg" alt="CAR POSTER SERIES - 3" class="w-full h-auto object-cover rounded-lg">
+                                </div>
+                        </div>
+                        <button class="slider-button left"><i class="fas fa-chevron-left text-2xl"></i></button>
+                        <button class="slider-button right"><i class="fas fa-chevron-right text-2xl"></i></button>
+                        <div class="slider-dots"></div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-4 text-blue-600">Technologies Used</h3>
-                        <ul class="list-disc list-inside space-y-2 text-lg">
-                            <li>ETABS</li>
-                            <li>AutoCAD</li>
-                        </ul>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">Project Overview</h3>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            This collection showcases a range of brand and poster designs created for various campaigns and events. The focus here is on visual hierarchy, typography, and color theory to create compelling and memorable public-facing materials.
+                        </p>
                     </div>
                 </div>
 
-                <div class="flex justify-center mt-8">
-                    <a href="index.html#projects" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300 flex items-center">
-                        <i class="fas fa-arrow-left mr-3"></i> Back to All Projects
-                    </a>
+                <hr class="my-12 border-gray-300 dark:border-gray-600">
+
+                <!-- Social Media Designs Section -->
+                <div class="project-section">
+                    <h2 class="text-3xl font-bold mb-6 text-center">Social Media Designs</h2>
+                    <div class="slider-container" id="slider-2">
+                        <div class="slider-inner">
+                            <div class="slider-slide">
+                                <img src="images/FOOD POSTER SERIES - 2.jpg" alt="FOOD POSTER SERIES - 2" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                             <div class="slider-slide">
+                                <img src="images/FOOD POSTER SERIES - 3.jpg" alt="FOOD POSTER SERIES - 3" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                            <div class="slider-slide">
+                                <img src="images/FOOD POSTER SERIES - 4.jpg" alt="FOOD POSTER SERIES - 4" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                            <div class="slider-slide">
+                                <img src="images/Social media post 1.jpg" alt="FOOD POSTER SERIES - 4" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                            <div class="slider-slide">
+                                <img src="images/SOCIAL MEDIA POST SERIES - 1.jpg" alt="FOOD POSTER SERIES - 4" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                        </div>
+                        <button class="slider-button left"><i class="fas fa-chevron-left text-2xl"></i></button>
+                        <button class="slider-button right"><i class="fas fa-chevron-right text-2xl"></i></button>
+                        <div class="slider-dots"></div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">Project Overview</h3>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            This section features a variety of designs optimized for social media platforms. Each piece is crafted to grab attention in a fast-paced feed, using bold visuals and concise messaging to drive engagement and communicate brand identity.
+                        </p>
+                    </div>
+                </div>
+
+                <hr class="my-12 border-gray-300 dark:border-gray-600">
+
+                <!-- Thumbnail Designs Section -->
+                <div class="project-section">
+                    <h2 class="text-3xl font-bold mb-6 text-center">Thumbnail Designs</h2>
+                    <div class="slider-container" id="slider-3">
+                        <div class="slider-inner">
+                            <div class="slider-slide">
+                                <img src="images/Thumbnail Series - 1.jpg" alt="Thumbnail Design 1" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                            <div class="slider-slide">
+                                <img src="images/Thumbnail Series - 2.jpg" alt="Thumbnail Design 2" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                            <div class="slider-slide">
+                                <img src="images/Thumbnail Series - 3.jpg" alt="Thumbnail Design 3" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                        </div>
+                        <button class="slider-button left"><i class="fas fa-chevron-left text-2xl"></i></button>
+                        <button class="slider-button right"><i class="fas fa-chevron-right text-2xl"></i></button>
+                        <div class="slider-dots"></div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">Project Overview</h3>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            A showcase of thumbnail designs for video and web content. These designs are strategically created to be clickable and stand out from the competition, often featuring bold text, expressive images, and a consistent visual style.
+                        </p>
+                    </div>
+                </div>
+            </div>
+<!-- Shorts Thumbnail Designs Section -->
+                <div class="project-section">
+                    <h2 class="text-3xl font-bold mb-6 text-center"> Reels/Shorts Thumbnail Designs</h2>
+                    <div class="slider-container" id="slider-3">
+                        <div class="slider-inner">
+                            <div class="slider-slide">
+                                <img src="images/shorts thumbnail 1.jpg" alt="Thumbnail Design 1" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                            <div class="slider-slide">
+                                <img src="images/shorts thumbnail 2.jpg" alt="Thumbnail Design 2" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                            <div class="slider-slide">
+                                <img src="images/Thumbnail Series - 3.jpg" alt="Thumbnail Design 3" class="w-full h-auto object-cover rounded-lg">
+                            </div>
+                        </div>
+                        <button class="slider-button left"><i class="fas fa-chevron-left text-2xl"></i></button>
+                        <button class="slider-button right"><i class="fas fa-chevron-right text-2xl"></i></button>
+                        <div class="slider-dots"></div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">Project Overview</h3>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            A showcase of thumbnail designs for video and web content. These designs are strategically created to be clickable and stand out from the competition, often featuring bold text, expressive images, and a consistent visual style.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+
+    <!-- Footer Skills/Software Section -->
+    <div class="container mx-auto px-6 md:px-12 mt-12 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center section-bg-light rounded-xl shadow-lg border border-adaptive text-adaptive p-10">
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Core Skills</h3>
+                <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                    <li>Typography & Layout</li>
+                    <li>Color Theory</li>
+                    <li>Digital Illustration</li>
+                    <li>Photo Manipulation</li>
+                    <li>Branding & Identity</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Software Used</h3>
+                <div class="flex flex-wrap items-center space-x-4">
+                    <img src="images/photoshop png.png" alt="Adobe Photoshop" class="w-12 h-12">
+                    <img src="images/adobe-illustrator-logo.png" alt="Adobe Illustrator" class="w-12 h-12">
+                    <img src="images/adobe-indesign-logo.png" alt="Adobe InDesign" class="w-12 h-12">
+                </div>
+                
+    </main>
                 </div>
             </div>
         </div>
-    </main>
-
+    </div>
+<div class="text-center my-12">
+        <a href="index.html#projects" class="inline-flex items-center bg-blue-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:underline transition-colors duration-300">
+            <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+        </a>
+    </div>            
     <!-- Main Footer -->
     <footer class="bg-gray-800 py-8 px-6 md:px-12 text-center">
         <p class="text-white">&copy; <span id="current-year-footer"></span>  2025 Jubayer Hossen Rifat. All rights reserved.</p>
@@ -166,13 +312,14 @@
 
     <script>
         // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        document.getElementById('current-year-footer').textContent = new Date().getFullYear();
 
-        // Theme Toggle Functionality (copied from index.html)
+        // Theme Toggle Functionality
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
 
+        // Check for saved theme preference or default to light
         const savedTheme = localStorage.getItem('theme') || 'light-theme';
         body.classList.add(savedTheme);
         if (savedTheme === 'dark-theme') {
@@ -197,6 +344,91 @@
                 themeIcon.classList.add('fa-moon');
                 localStorage.setItem('theme', 'light-theme');
             }
+        });
+        
+        // --- Multi-Image Slider Logic ---
+        
+        // Get all slider containers on the page
+        const sliderContainers = document.querySelectorAll('.slider-container');
+
+        sliderContainers.forEach(container => {
+            const sliderInner = container.querySelector('.slider-inner');
+            const prevButton = container.querySelector('.slider-button.left');
+            const nextButton = container.querySelector('.slider-button.right');
+            const dotsContainer = container.querySelector('.slider-dots');
+            const slides = container.querySelectorAll('.slider-slide');
+            const totalSlides = slides.length;
+            let currentIndex = 0;
+
+            // Create navigation dots dynamically
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.setAttribute('data-index', index);
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.dot');
+
+            function updateSlider() {
+                const offset = -currentIndex * 100;
+                sliderInner.style.transform = `translateX(${offset}%)`;
+
+                // Update active dot
+                dots.forEach(dot => dot.classList.remove('active'));
+                if (dots[currentIndex]) {
+                    dots[currentIndex].classList.add('active');
+                }
+            }
+
+            // Navigation
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            });
+
+            // Dot navigation
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    currentIndex = parseInt(e.target.dataset.index);
+                    updateSlider();
+                });
+            });
+
+            // Touch swipe functionality
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            sliderInner.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            }, false);
+
+            sliderInner.addEventListener('touchmove', (e) => {
+                touchEndX = e.touches[0].clientX;
+            }, false);
+
+            sliderInner.addEventListener('touchend', () => {
+                const touchThreshold = 50; // Minimum distance to register a swipe
+                const diffX = touchStartX - touchEndX;
+
+                if (diffX > touchThreshold) {
+                    // Swiped left
+                    currentIndex = (currentIndex + 1) % totalSlides;
+                    updateSlider();
+                } else if (diffX < -touchThreshold) {
+                    // Swiped right
+                    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                    updateSlider();
+                }
+            }, false);
+            
+            // Initial call to set up the slider
+            updateSlider();
         });
     </script>
 </body>
