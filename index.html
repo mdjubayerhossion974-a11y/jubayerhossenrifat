@@ -81,25 +81,13 @@
 
         /* Hero section background image */
         #home-section {
-            background-image: url('images/professional_image.jpg'); /* Replace with your image */
+            background-color: #2d3748; /* Fallback color */
+            /* In a real scenario, you'd use a background image here */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888081665-de065a2d7119?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed; /* Parallax effect */
             position: relative;
-        }
-        #home-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6); /* Dark overlay for text readability */
-            z-index: 1;
-        }
-        #home-section > div {
-            position: relative;
-            z-index: 2;
         }
 
         /* Project filter button active state */
@@ -108,132 +96,487 @@
             color: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
+
+        /* Testimonial Carousel Styles */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none; /* Internet Explorer and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+        .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-top-color: #3b82f6; /* Blue 500 */
+        }
+        body.dark-theme .testimonial-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
+        }
+        .carousel-dot {
+            transition: all 0.3s ease;
+        }
+
+        /* Services Card specific styles */
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1); 
+        }
+        body.light-theme .service-card {
+             border: 1px solid rgba(0,0,0,0.1);
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        body.dark-theme .service-card:hover {
+             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* --- Scroll Reveal Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        /* Active state classes triggered by JS */
+        .reveal.active, 
+        .reveal-left.active, 
+        .reveal-right.active, 
+        .reveal-scale.active {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+        
+        /* Staggered transition delays for grouped elements */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
     </style>
 </head>
 <body class="antialiased light-theme">
 
-    <!-- Header/Navigation -->
-    <header class="bg-white section-bg-light shadow-md py-4 px-6 md:px-12 fixed w-full z-20">
+    <header class="bg-white section-bg-light shadow-md py-4 px-6 md:px-12 fixed w-full z-50 transition-colors duration-300">
         <nav class="container mx-auto flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition duration-300 text-adaptive">Jubayer Hossen <span class="text-blue-600">Rifat</span></a>
+            <a href="#home" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition duration-300 text-adaptive tracking-tight">Jubayer Hossen <span class="text-blue-600">Rifat</span></a>
             <ul class="hidden md:flex space-x-6">
-                <li><a href="#home-section" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Home</a></li>
+                <li><a href="#home" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Home</a></li>
                 <li><a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">About</a></li>
-                <li><a href="#experience" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Experience</a></li>
                 <li><a href="#skills" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Skills</a></li>
+                <li><a href="#services" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Services</a></li>
+                <li><a href="#experience" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Experience</a></li>
                 <li><a href="#projects" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Projects</a></li>
-                <li><a href="#testimonials" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Testimonials</a></li>
                 <li><a href="#resume" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Resume</a></li>
                 <li><a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium text-adaptive">Contact</a></li>
-             </ul>   
+            </ul>
             <div class="flex items-center space-x-4">
                 <!-- Theme Toggle Button -->
-                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 section-bg-dark text-adaptive">
-                    <i class="fas fa-moon text-lg" id="theme-icon"></i>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300 text-adaptive" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
                 </button>
+                <div class="hidden md:block">
+                    <a href="#contact" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition duration-300 font-medium shadow-md">Hire Me</a>
+                </div>
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none text-adaptive">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </nav>
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white bg-opacity-95 z-30 flex flex-col items-center justify-center space-y-8 text-xl section-bg-light text-adaptive">
-            <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-600 focus:outline-none text-adaptive">
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-8 text-xl section-bg-light text-adaptive transition-opacity duration-300">
+            <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-600 focus:outline-none text-adaptive hover:text-red-500 transition-colors">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <a href="#home-section" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Home</a>
-            <a href="#about" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
-            <a href="#skills" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Skills</a>
-            <a href="#projects" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Projects</a>
-            <a href="#testimonials" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Testimonials</a>
-            <a href="#resume" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Resume</a>
-            <a href="#contact" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+            <a href="#home" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive mobile-link">Home</a>
+            <a href="#about" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive mobile-link">About</a>
+            <a href="#skills" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive mobile-link">Skills</a>
+            <a href="#services" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive mobile-link">Services</a>
+            <a href="#projects" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive mobile-link">Projects</a>
+            <a href="#resume" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive mobile-link">Resume</a>
+            <a href="#contact" class="text-gray-800 hover:text-blue-600 transition duration-300 font-medium text-adaptive mobile-link">Contact</a>
         </div>
     </header>
 
     <main class="pt-20"> <!-- Padding to account for fixed header -->
-        <!-- Home Section -->
-        <section id="home-section" class="py-20 px-6 md:px-12 flex items-center justify-center min-h-screen">
-            <div class="container mx-auto flex flex-col items-center justify-center text-center text-white space-y-8">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
+        
+        <section id="home" class="py-20 px-6 md:px-12 flex items-center justify-center min-h-screen" id="home-section">
+            <div class="container mx-auto flex flex-col items-center justify-center text-center text-white space-y-8 relative z-10">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight drop-shadow-lg reveal">
                     Jubayer Hossen <span class="text-blue-400">Rifat</span>
                 </h1>
-                <p class="text-xl md:text-3xl font-light mb-6 drop-shadow-md">
+                <p class="text-2xl md:text-4xl font-light mb-6 drop-shadow-md reveal delay-100">
                     Civil Engineer & Visual Creator
                 </p>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 drop-shadow-md">
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 drop-shadow-md reveal delay-200 opacity-90">
                     Building tomorrow's infrastructure while crafting today's digital experiences. Where engineering precision meets creative vision.
                 </p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                    <a href="#projects" class="bg-white text-blue-600 hover:bg-blue-100 px-8 py-4 rounded-full text-lg font-bold transition duration-300 shadow-lg flex items-center justify-center">
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 reveal delay-300">
+                    <a href="#projects" class="bg-blue-600 text-white hover:bg-blue-700 px-8 py-4 rounded-full text-lg font-bold transition duration-300 shadow-lg flex items-center justify-center">
                         <i class="fas fa-briefcase mr-3"></i> View My Work
                     </a>
-                    <a href="#contact" class="border border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-full text-lg font-bold transition duration-300 shadow-lg flex items-center justify-center">
+                    <a href="#contact" class="bg-white text-gray-900 hover:bg-gray-100 px-8 py-4 rounded-full text-lg font-bold transition duration-300 shadow-lg flex items-center justify-center">
                         <i class="fas fa-envelope mr-3"></i> Get in Touch
                     </a>
                 </div>
             </div>
+            <!-- Scroll down indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce reveal delay-400 z-10">
+                <a href="#about" class="text-white opacity-75 hover:opacity-100 transition-opacity">
+                    <i class="fas fa-chevron-down text-3xl"></i>
+                </a>
+            </div>
         </section>
 
-       <!-- About Section -->
-        <section id="about" class="py-16 px-6 md:px-12 section-bg-light">
+        <section id="about" class="py-24 px-6 md:px-12 section-bg-light">
             <div class="container mx-auto">
-                <h2 class="text-4xl font-bold text-center mb-12 text-adaptive">ABOUT ME</h2>
-                <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
-                    <div class="md:w-1/2 text-lg text-gray-700 text-adaptive leading-relaxed">
-                        <p class="mb-4">
-                            I am a dedicated Civil Engineering graduate with a distinct creative edge. I am seeking an opportunity to assist in infrastructure projects while leveraging my proficiency in technical design tools and visual communication to contribute to sustainable development.
-                        </p>
-                        <p class="mb-4">
-                            Currently, I am pursuing my BSc in Civil Engineering at the World University of Bangladesh, building upon my strong foundation from my Diploma in Civil Technology. What sets me apart is my ability to manage rigorous on-site execution while also handling technical drafting and documentation.
-                        </p>
-                        <p>
-                            From serving as the President of the CPI Civil Soft Club to my recent professional roles, I combine strong leadership with hands-on technical skills in AutoCAD, ETABS, and logistics management.
-                        </p>
+                <div class="text-center mb-16 reveal">
+                    <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">Discover</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-2 text-adaptive">About Me</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-12 lg:gap-20">
+                    <div class="md:w-1/2 flex justify-center items-center relative reveal-left">
+                        <div class="relative group">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="Jubayer Hossen Rifat" class="relative rounded-lg shadow-2xl w-full max-w-md object-cover aspect-[4/5] z-10" onerror="this.src='https://placehold.co/400x500/e2e8f0/475569?text=Profile+Image'">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 z-20">
+                            <div class="text-center">
+                                <span class="block text-3xl font-bold text-blue-600">3+</span>
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Years Experience</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="md:w-1/2 flex justify-center items-center relative">
-                        <!-- Replace src with your actual image path -->
-                        <img src="images/jubayer hossen.jpg" alt="Jubayer Hossen Rifat" class="rounded-lg shadow-xl w-full max-w-md object-cover">
-                        <div class="absolute bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg">
-                            <i class="fas fa-graduation-cap text-2xl"></i>
+                    
+                    <div class="md:w-1/2 text-lg text-gray-700 text-adaptive leading-relaxed reveal-right delay-100">
+                        <h3 class="text-2xl font-bold mb-4 text-adaptive">Hello! I'm Jubayer Hossen Rifat.</h3>
+                        <p class="mb-6">
+                            I am a dedicated civil engineering diploma graduate from CPI Management and Technology, actively seeking opportunities to assist in infrastructure projects. My journey is driven by an eagerness to apply my knowledge of construction principles and project management to contribute to sustainable development.
+                        </p>
+                        <p class="mb-6">
+                            As the former President of CPI Civil Soft Club and an active participant in various engineering competitions, I combine technical skills with leadership experience. This unique combination allows me to not only design and analyze structures but also communicate complex engineering concepts through compelling visuals and documentation.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                            <div class="flex items-center space-x-3 text-sm">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-gray-500 text-xs">Location</span>
+                                    <span class="font-medium text-adaptive">Dhaka, Bangladesh</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 text-sm">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-gray-500 text-xs">Email</span>
+                                    <span class="font-medium text-adaptive">contact@example.com</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 text-sm">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-gray-500 text-xs">Education</span>
+                                    <span class="font-medium text-adaptive">Diploma in Civil Eng.</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 text-sm">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-gray-500 text-xs">Freelance</span>
+                                    <span class="font-medium text-adaptive">Available</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-<!-- Professional Experience Section -->
-        <section id="experience" class="py-16 px-6 md:px-12 section-bg-dark">
+
+        <section id="skills" class="py-24 px-6 md:px-12 section-bg-dark">
             <div class="container mx-auto">
-                <h2 class="text-4xl font-bold text-center mb-4 text-adaptive">Professional Experience</h2>
-                <p class="text-lg text-center mb-12 text-gray-600 text-adaptive">My recent industry roles in project supervision, drafting, and management.</p>
+                <div class="text-center mb-16 reveal">
+                    <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">Proficiency</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-2 text-adaptive">Skills & Expertise</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+                    <p class="mt-6 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">A comprehensive toolkit spanning civil engineering software and multimedia design tools.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+                    <!-- Civil Engineering Software Box -->
+                    <div class="bg-adaptive p-8 rounded-2xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300 reveal-left delay-100">
+                        <div class="flex items-center mb-8">
+                            <div class="w-14 h-14 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mr-4">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-adaptive">Civil Engineering</h3>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <!-- Skill 1 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium text-adaptive">AutoCAD (2D & 3D)</span>
+                                    <span class="text-sm text-gray-500">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 2 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium text-adaptive">ETABS</span>
+                                    <span class="text-sm text-gray-500">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 3 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium text-adaptive">SketchUp</span>
+                                    <span class="text-sm text-gray-500">80%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 4 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium text-adaptive">MS Office Suite</span>
+                                    <span class="text-sm text-gray-500">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Multimedia Tools Box -->
+                    <div class="bg-adaptive p-8 rounded-2xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300 reveal-right delay-200">
+                        <div class="flex items-center mb-8">
+                            <div class="w-14 h-14 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-2xl mr-4">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-adaptive">Multimedia & Design</h3>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <!-- Skill 1 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium text-adaptive">Adobe Premiere Pro</span>
+                                    <span class="text-sm text-gray-500">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-purple-600 h-2.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 2 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium text-adaptive">Adobe Illustrator</span>
+                                    <span class="text-sm text-gray-500">75%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-purple-600 h-2.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 3 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium text-adaptive">Canva (Pro)</span>
+                                    <span class="text-sm text-gray-500">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-purple-600 h-2.5 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 4 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium text-adaptive">Visual Documentation</span>
+                                    <span class="text-sm text-gray-500">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-purple-600 h-2.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-24 px-6 md:px-12 section-bg-light">
+            <div class="container mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">What I Offer</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-2 text-adaptive">My Services</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+                    <p class="mt-6 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">Professional solutions combining engineering accuracy and visual storytelling tailored to your needs.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Service 1: AutoCAD -->
+                    <div class="service-card bg-adaptive p-8 rounded-2xl reveal-scale delay-100 text-left">
+                        <div class="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-3xl text-blue-600 mb-6 transition-transform group-hover:scale-110">
+                            <i class="fas fa-drafting-compass"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-adaptive">AutoCAD Drawings</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">Precise and detailed 2D drafting for architectural and structural projects. Transforming concepts into professional blueprints ready for execution.</p>
+                        <ul class="text-sm font-medium text-gray-700 dark:text-gray-300 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Architectural layouts</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Structural detailing</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Site plans</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2: Floor Plans -->
+                    <div class="service-card bg-adaptive p-8 rounded-2xl reveal-scale delay-200 text-left">
+                        <div class="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-3xl text-blue-600 mb-6">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-adaptive">Floor Plans</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">Optimized residential and commercial floor plan designs maximizing space utility, flow, and aesthetic appeal based on specific client requirements.</p>
+                        <ul class="text-sm font-medium text-gray-700 dark:text-gray-300 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Space optimization</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Furniture layouts</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Area calculation</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3: Structure Plan -->
+                    <div class="service-card bg-adaptive p-8 rounded-2xl reveal-scale delay-300 text-left">
+                        <div class="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-3xl text-blue-600 mb-6">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-adaptive">Structure Plans</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">Robust structural design and analysis ensuring safety and stability. Utilizing modern software for accurate load calculations and detailing.</p>
+                        <ul class="text-sm font-medium text-gray-700 dark:text-gray-300 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Load analysis (ETABS)</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Reinforcement detailing</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Foundation plans</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 4: 3D Visualization -->
+                    <div class="service-card bg-adaptive p-8 rounded-2xl reveal-scale delay-100 text-left">
+                        <div class="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-3xl text-blue-600 mb-6">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-adaptive">3D Visualization</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">Bringing 2D designs to life with realistic 3D modeling and rendering. Helping clients visualize the final outcome before construction begins.</p>
+                        <ul class="text-sm font-medium text-gray-700 dark:text-gray-300 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Exterior & Interior</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Realistic rendering</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> Walkthroughs</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 5: Video Editing -->
+                    <div class="service-card bg-adaptive p-8 rounded-2xl reveal-scale delay-200 text-left">
+                        <div class="w-16 h-16 rounded-full bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-3xl text-purple-600 mb-6">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-adaptive">Video Editing</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">Professional post-production for corporate events, project documentaries, and promotional content. Crafting compelling visual narratives.</p>
+                        <ul class="text-sm font-medium text-gray-700 dark:text-gray-300 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-2"></i> Premiere Pro editing</li>
+                            <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-2"></i> Color grading</li>
+                            <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-2"></i> Motion graphics</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 6: Photo Editing -->
+                    <div class="service-card bg-adaptive p-8 rounded-2xl reveal-scale delay-300 text-left">
+                        <div class="w-16 h-16 rounded-full bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-3xl text-purple-600 mb-6">
+                            <i class="fas fa-camera-retro"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-adaptive">Photo Editing</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">Enhancing architectural and event photography. Advanced retouching and color correction to ensure every image makes a strong impact.</p>
+                        <ul class="text-sm font-medium text-gray-700 dark:text-gray-300 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-2"></i> Lightroom enhancement</li>
+                            <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-2"></i> Photoshop retouching</li>
+                            <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-2"></i> Visual documentation</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Experience Section -->
+        <section id="experience" class="py-24 px-6 md:px-12 section-bg-dark">
+            <div class="container mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">Career History</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-2 text-adaptive">Professional Experience</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+                    <p class="mt-6 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">My recent industry roles in project supervision, drafting, and management.</p>
+                </div>
 
                 <div class="max-w-4xl mx-auto space-y-8">
                     <!-- Experience 1: Coca-Cola -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300 border-l-4 border-l-blue-600">
+                    <div class="bg-adaptive p-8 rounded-2xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300 border-l-4 border-l-blue-600 reveal-left delay-100">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                             <div>
                                 <h3 class="text-2xl font-bold text-blue-600">Cooler Distribution Management (CDM) Team Member</h3>
                                 <p class="text-xl font-semibold text-adaptive mt-1">Coca-Cola</p>
                             </div>
-                            <span class="mt-2 md:mt-0 inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">08 June 2026 – 15 July 2026</span>
+                            <span class="mt-2 md:mt-0 inline-block bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 text-sm font-semibold px-3 py-1 rounded-full">08 June 2026 – 15 July 2026</span>
                         </div>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700 text-adaptive mt-4">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mt-4 leading-relaxed">
                             <li>Audited and verified logistics and distribution documentation to ensure complete compliance with corporate tracking standards.</li>
                             <li>Managed high-volume data entry and reconciliation using Microsoft Excel, accurately cross-referencing physical paperwork with digital databases.</li>
                         </ul>
                     </div>
 
                     <!-- Experience 2: BD Architect Design -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300 border-l-4 border-l-blue-600">
+                    <div class="bg-adaptive p-8 rounded-2xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300 border-l-4 border-l-blue-600 reveal-right delay-200">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                             <div>
                                 <h3 class="text-2xl font-bold text-blue-600">Associate Civil Engineer / AutoCAD Draftsman</h3>
                                 <p class="text-xl font-semibold text-adaptive mt-1">Bangladesh Drawing and Architect Design</p>
                             </div>
-                            <span class="mt-2 md:mt-0 inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">03, January 2026 – 31, June 2026</span>
+                            <span class="mt-2 md:mt-0 inline-block bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 text-sm font-semibold px-3 py-1 rounded-full">03 January 2026 – 31 June 2026</span>
                         </div>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700 text-adaptive mt-4">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mt-4 leading-relaxed">
                             <li>Managed full-time site supervision and structural drafting operations, maintaining a rigorous 6-day workweek schedule to meet strict project deadlines.</li>
                             <li>Oversaw daily on-site construction activities, ensuring reinforcement detailing and structural execution aligned perfectly with architectural blueprints.</li>
                             <li>Developed detailed engineering draft designs and 2D structural layouts using AutoCAD for residential and commercial projects.</li>
@@ -244,176 +587,118 @@
             </div>
         </section>
 
+        
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-16 px-6 md:px-12 section-bg-dark">
-            <div class="container mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-4 text-adaptive">Skills & Expertise</h2>
-                <p class="text-lg mb-12 text-gray-600 text-adaptive">A comprehensive toolkit spanning civil engineering software and multimedia design tools.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Civil Engineering Software Box -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300">
-                        <h3 class="text-2xl font-semibold mb-6 text-blue-600">Civil Engineering Software</h3>
-                        <ul class="text-left space-y-3 text-lg text-gray-700 text-adaptive">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> AutoCAD - Certified</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> ETABS - Proficient</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> SketchUp - Advanced</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Total Station - Certified</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> MS Office Suite - Certified</li>
-                        </ul>
-                    </div>
-                    <!-- Multimedia Tools Box -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300">
-                        <h3 class="text-2xl font-semibold mb-6 text-blue-600">Multimedia Tools</h3>
-                        <ul class="text-left space-y-3 text-lg text-gray-700 text-adaptive">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Adobe Photoshop - Advanced</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Adobe Premiere Pro - Advanced</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Adobe Lightroom - Advanced</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Photography & Videography</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Visual Documentation</li>
-                        </ul>
-                    </div>
+        <section id="projects" class="py-24 px-6 md:px-12 section-bg-dark">
+            <div class="container mx-auto">
+                <div class="text-center mb-12 reveal">
+                    <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">Portfolio</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-2 text-adaptive">Featured Projects</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+                    <p class="mt-6 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">A showcase of engineering precision and creative vision across various disciplines.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="py-16 px-6 md:px-12 section-bg-light">
-            <div class="container mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-4 text-adaptive">Featured Projects</h2>
-                <p class="text-lg mb-12 text-gray-600 text-adaptive">A showcase of engineering precision and creative vision across civil and multimedia projects.</p>
 
                 <!-- Project Filter Buttons -->
-                <div class="flex justify-center space-x-4 mb-12">
-                    <button class="filter-button px-6 py-3 rounded-full text-lg font-semibold transition duration-300 bg-gray-200 text-gray-700 active section-bg-dark text-adaptive" data-filter="all">All Projects</button>
-                    <button class="filter-button px-6 py-3 rounded-full text-lg font-semibold transition duration-300 bg-gray-200 text-gray-700 section-bg-dark text-adaptive" data-filter="engineering">Engineering</button>
-                    <button class="filter-button px-6 py-3 rounded-full text-lg font-semibold transition duration-300 bg-gray-200 text-gray-700 section-bg-dark text-adaptive" data-filter="multimedia">Multimedia</button>
+                <div class="flex flex-wrap justify-center gap-4 mb-12 reveal delay-100">
+                    <button class="filter-button px-6 py-2.5 rounded-full text-sm font-semibold transition duration-300 active section-bg-light text-adaptive border border-adaptive hover:border-blue-500" data-filter="all">All Projects</button>
+                    <button class="filter-button px-6 py-2.5 rounded-full text-sm font-semibold transition duration-300 section-bg-light text-adaptive border border-adaptive hover:border-blue-500" data-filter="engineering">Engineering</button>
+                    <button class="filter-button px-6 py-2.5 rounded-full text-sm font-semibold transition duration-300 section-bg-light text-adaptive border border-adaptive hover:border-blue-500" data-filter="multimedia">Multimedia</button>
                 </div>
 
                 <!-- Project Grid -->
-                <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project Card 1 (Engineering) -->
-                    <div class="project-card bg-adaptive rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-2" data-category="engineering">
-                        <img src="images/autocaddesign.jpg" alt="AutoCAD Drawing" class="w-full h-56 object-cover">
+                    <div class="project-card group bg-adaptive rounded-2xl shadow-adaptive overflow-hidden transition duration-300 transform hover:-translate-y-2 reveal-scale delay-100 border border-adaptive" data-category="engineering">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" alt="AutoCAD Drawing" class="w-full h-60 object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=AutoCAD+Design'">
+                            <div class="absolute inset-0 bg-blue-600 bg-opacity-0 group-hover:bg-opacity-20 transition duration-300"></div>
+                            <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Engineering</span>
+                        </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-2 text-adaptive">Residential Building Plan</h3>
-                            <p class="text-gray-600 mb-4 text-adaptive">Detailed architectural and structural plans for a multi-story residential building.</p>
-                            <div class="flex justify-between items-center text-adaptive">
-                                <span class="text-sm font-medium text-blue-600"><i class="fas fa-tools mr-1"></i> Engineering</span>
-                                <span class="text-sm font-medium text-gray-500"><i class="fas fa-desktop mr-1"></i> AutoCAD</span>
-                            </div>
-                            <a href="project-residential-building.html" class="inline-block mt-4 w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-                                View Details
+                            <h3 class="text-xl font-bold mb-2 text-adaptive group-hover:text-blue-600 transition duration-300">Residential Floor Plan</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">Complete 2D drafting and space optimization for a modern 3-story residential building using AutoCAD.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition duration-300">
+                                View Details <i class="fas fa-arrow-right ml-2 text-sm transition-transform group-hover:translate-x-1"></i>
                             </a>
                         </div>
                     </div>
 
                     <!-- Project Card 2 (Engineering) -->
-                    <div class="project-card bg-adaptive rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-2" data-category="engineering">
-                        <img src="images/etabsdesign.jpg" alt="ETABS Model" class="w-full h-56 object-cover">
+                    <div class="project-card group bg-adaptive rounded-2xl shadow-adaptive overflow-hidden transition duration-300 transform hover:-translate-y-2 reveal-scale delay-200 border border-adaptive" data-category="engineering">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="ETABS Model" class="w-full h-60 object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=ETABS+Design'">
+                            <div class="absolute inset-0 bg-blue-600 bg-opacity-0 group-hover:bg-opacity-20 transition duration-300"></div>
+                            <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Engineering</span>
+                        </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-2 text-adaptive">High-Rise Structure Analysis</h3>
-                            <p class="text-gray-600 mb-4 text-adaptive">Seismic and wind load analysis for a 20-story commercial building using ETABS.</p>
-                            <div class="flex justify-between items-center text-adaptive">
-                                <span class="text-sm font-medium text-blue-600"><i class="fas fa-tools mr-1"></i> Engineering</span>
-                                <span class="text-sm font-medium text-gray-500"><i class="fas fa-desktop mr-1"></i> ETABS</span>
-                            </div>
-                            <a href="project-high-rise.html" class="inline-block mt-4 w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-                                View Details
+                            <h3 class="text-xl font-bold mb-2 text-adaptive group-hover:text-blue-600 transition duration-300">High-Rise Structural Analysis</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">Load calculation and structural integrity analysis for a commercial high-rise using ETABS.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition duration-300">
+                                View Details <i class="fas fa-arrow-right ml-2 text-sm transition-transform group-hover:translate-x-1"></i>
                             </a>
                         </div>
                     </div>
 
                     <!-- Project Card 3 (Multimedia) -->
-                    <div class="project-card bg-adaptive rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-2" data-category="multimedia">
-                        <img src="images/eternalbranddesgin.jpg" alt="Brand Design" class="w-full h-56 object-cover">
+                    <div class="project-card group bg-adaptive rounded-2xl shadow-adaptive overflow-hidden transition duration-300 transform hover:-translate-y-2 reveal-scale delay-300 border border-adaptive" data-category="multimedia">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1542744094-24638ea0b3b5?q=80&w=800&auto=format&fit=crop" alt="Brand Design" class="w-full h-60 object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Brand+Design'">
+                            <div class="absolute inset-0 bg-purple-600 bg-opacity-0 group-hover:bg-opacity-20 transition duration-300"></div>
+                            <span class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Multimedia</span>
+                        </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-2 text-adaptive">Creative Brand Identity</h3>
-                            <p class="text-gray-600 mb-4 text-adaptive">Development of a complete brand identity, including logo, color palette, and typography.</p>
-                            <div class="flex justify-between items-center text-adaptive">
-                                <span class="text-sm font-medium text-purple-600"><i class="fas fa-paint-brush mr-1"></i> Multimedia</span>
-                                <span class="text-sm font-medium text-gray-500"><i class="fas fa-desktop mr-1"></i> Photoshop</span>
-                            </div>
-                            <a href="project-brand-identity.html" class="inline-block mt-4 w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-                                View Details
+                            <h3 class="text-xl font-bold mb-2 text-adaptive group-hover:text-purple-600 transition duration-300">Corporate Brand Identity</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">Comprehensive visual identity design including logo, typography, and marketing materials for a local startup.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition duration-300">
+                                View Details <i class="fas fa-arrow-right ml-2 text-sm transition-transform group-hover:translate-x-1"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Project Card 4 (Multimedia) -->
-                    <div class="project-card bg-adaptive rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-2" data-category="multimedia">
-                        <img src="images/photography-image.jpg" alt="Event Photography" class="w-full h-56 object-cover">
+                     <!-- Project Card 4 (Engineering) -->
+                     <div class="project-card group bg-adaptive rounded-2xl shadow-adaptive overflow-hidden transition duration-300 transform hover:-translate-y-2 reveal-scale delay-100 border border-adaptive" data-category="engineering">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" alt="3D Building" class="w-full h-60 object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=3D+Building'">
+                            <div class="absolute inset-0 bg-blue-600 bg-opacity-0 group-hover:bg-opacity-20 transition duration-300"></div>
+                            <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Engineering</span>
+                        </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-2 text-adaptive">Photography & Editing</h3>
-                            <p class="text-gray-600 mb-4 text-adaptive">Capturing the nature, showcasing key moments.</p>
-                            <div class="flex justify-between items-center text-adaptive">
-                                <span class="text-sm font-medium text-purple-600"><i class="fas fa-paint-brush mr-1"></i> Multimedia</span>
-                                <span class="text-sm font-medium text-gray-500"><i class="fas fa-desktop mr-1"></i> Lightroom</span>
-                            </div>
-                            <a href="project-photography.html" class="inline-block mt-4 w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-                                View Details
+                            <h3 class="text-xl font-bold mb-2 text-adaptive group-hover:text-blue-600 transition duration-300">3D Campus Visualization</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">Detailed 3D modeling and rendering of an educational campus layout using SketchUp.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition duration-300">
+                                View Details <i class="fas fa-arrow-right ml-2 text-sm transition-transform group-hover:translate-x-1"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Project Card 5 (Engineering) -->
-                    <div class="project-card bg-adaptive rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-2" data-category="engineering">
-                        <img src="images/3dbuilding.jpg" alt="SketchUp Model" class="w-full h-56 object-cover">
+                    <!-- Project Card 5 (Multimedia) -->
+                    <div class="project-card group bg-adaptive rounded-2xl shadow-adaptive overflow-hidden transition duration-300 transform hover:-translate-y-2 reveal-scale delay-200 border border-adaptive" data-category="multimedia">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=800&auto=format&fit=crop" alt="Event Photography" class="w-full h-60 object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Photography'">
+                            <div class="absolute inset-0 bg-purple-600 bg-opacity-0 group-hover:bg-opacity-20 transition duration-300"></div>
+                            <span class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Multimedia</span>
+                        </div>
                         <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-2 text-adaptive">3D Building Visualization</h3>
-                            <p class="text-gray-600 mb-4 text-adaptive">Creating realistic 3D models and renderings for an interior & exterior design concept using SketchUp.</p>
-                            <div class="flex justify-between items-center text-adaptive">
-                                <span class="text-sm font-medium text-blue-600"><i class="fas fa-tools mr-1"></i> Engineering</span>
-                                <span class="text-sm font-medium text-gray-500"><i class="fas fa-desktop mr-1"></i> SketchUp</span>
-                            </div>
-                            <a href="project-3d-building.html" class="inline-block mt-4 w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-                                View Details
+                            <h3 class="text-xl font-bold mb-2 text-adaptive group-hover:text-purple-600 transition duration-300">Tech Conference Coverage</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">Event photography and post-processing for an annual technology symposium.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition duration-300">
+                                View Details <i class="fas fa-arrow-right ml-2 text-sm transition-transform group-hover:translate-x-1"></i>
                             </a>
                         </div>
                     </div>
-                    <!-- Project Card 6 (Graphic Designs) -->
-                    <div class="project-card bg-white section-bg-light rounded-lg shadow-lg overflow-hidden border border-adaptive transition-all duration-300 hover:shadow-2xl hover:scale-105" data-category="multimedia">
-                        <img src="images/graphic design.jpg" alt="Graphic Designs Thumbnail" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-2 text-adaptive">Graphic Designs</h3>
-                            <p class="text-gray-600 text-adaptive">Posters & Social Media Layouts that i design in photoshop and ilustrator. you can checkd this</p>
-                     <div class="flex justify-between items-center text-adaptive">
-                                <span class="text-sm font-medium text-purple-600"><i class="fas fa-paint-brush mr-1"></i> Multimedia</span>
-                                <span class="text-sm font-medium text-gray-500"><i class="fas fa-desktop mr-1"></i> photoshop Illustrator</span>
-                            </div>
-                            <a href="graphic-designs.html" class="inline-block mt-4 w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-                                View Details       
-                            </a>
+
+                    <!-- Project Card 6 (Multimedia) -->
+                    <div class="project-card group bg-adaptive rounded-2xl shadow-adaptive overflow-hidden transition duration-300 transform hover:-translate-y-2 reveal-scale delay-300 border border-adaptive" data-category="multimedia">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800&auto=format&fit=crop" alt="Video Editing" class="w-full h-60 object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Video+Editing'">
+                            <div class="absolute inset-0 bg-purple-600 bg-opacity-0 group-hover:bg-opacity-20 transition duration-300"></div>
+                            <span class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Multimedia</span>
                         </div>
-                    </div>
-                          <!-- Project Card 7 (Multimedia) -->
-                    <div class="project-card bg-adaptive rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-2" data-category="multimedia">
-                        <img src="images/urbannest logo.jpg" alt="BRAND DESIGN" class="w-full h-56 object-cover">
                         <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-2 text-adaptive">A Creative Brand Design</h3>
-                            <p class="text-gray-600 mb-4 text-adaptive">Developing a complete brand identity for your business.</p>
-                            <div class="flex justify-between items-center text-adaptive">
-                                <span class="text-sm font-medium text-purple-600"><i class="fas fa-paint-brush mr-1"></i> Multimedia</span>
-                                <span class="text-sm font-medium text-gray-500"><i class="fas fa-desktop mr-1"></i> Photoshop - Illustrator - InDesign</span>
-                            </div>
-                            <a href="URBANNEST-Project-Page.html" class="inline-block mt-4 w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-                                View Details
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Project Card 8 (Multimedia) -->
-                    <div class="project-card bg-adaptive rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-2" data-category="multimedia">
-                        <img src="images/video_editing_image.jpg" alt="Video Editing" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-2 text-adaptive">Promotional Video Production</h3>
-                            <p class="text-gray-600 mb-4 text-adaptive">Editing and post-production of a short promotional video for a local business.</p>
-                            <div class="flex justify-between items-center text-adaptive">
-                                <span class="text-sm font-medium text-purple-600"><i class="fas fa-paint-brush mr-1"></i> Multimedia</span>
-                                <span class="text-sm font-medium text-gray-500"><i class="fas fa-desktop mr-1"></i> Premiere Pro</span>
-                            </div>
-                            <a href="project-promotional-video.html" class="inline-block mt-4 w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-                                View Details
+                            <h3 class="text-xl font-bold mb-2 text-adaptive group-hover:text-purple-600 transition duration-300">Real Estate Promo Video</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">Dynamic video editing, color grading, and motion graphics for a luxury property showcase.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition duration-300">
+                                View Details <i class="fas fa-arrow-right ml-2 text-sm transition-transform group-hover:translate-x-1"></i>
                             </a>
                         </div>
                     </div>
@@ -421,234 +706,145 @@
             </div>
         </section>
 
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="py-16 px-6 md:px-12 section-bg-dark">
-            <div class="container mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-4 text-adaptive">What Clients Say</h2>
-                <p class="text-lg mb-12 text-gray-600 text-adaptive">Hear from satisfied clients about their experience working with me.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Testimonial Card 1 -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300">
-                        <div class="flex items-center mb-6">
-                            <img src="images/cleint 1.jpg" alt="Jara Rahman Photo" class="w-20 h-20 rounded-full object-cover mr-4 border-2 border-blue-500">
-                            <div class="text-left">
-                                <p class="text-xl font-semibold text-adaptive">Jara Rahman</p>
-                                <p class="text-gray-600 text-adaptive">CEO, Tech Solutions</p>
-                                <div class="flex mt-1">
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star-half-alt text-yellow-400"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-lg italic text-gray-700 text-adaptive leading-relaxed">
-                            "Jubayer's structural design for our new office building was impeccable. His attention to detail and understanding of complex engineering principles ensured a safe and efficient project. Highly recommend!"
-                        </p>
-                    </div>
-
-                    <!-- Testimonial Card 2 -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300">
-                        <div class="flex items-center mb-6">
-                            <img src="images/client 2.jpg" alt="Jakir Hossen Photo" class="w-20 h-20 rounded-full object-cover mr-4 border-2 border-blue-500">
-                            <div class="text-left">
-                                <p class="text-xl font-semibold text-adaptive">Jakir Hossen</p>
-                                <p class="text-gray-600 text-adaptive">Marketing Director, Creative Agency</p>
-                                <div class="flex mt-1">
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-lg italic text-gray-700 text-adaptive leading-relaxed">
-                            "His photography and video editing skills brought our campaign to life! Jubayer has a keen eye for visuals and delivered stunning results that exceeded our expectations."
-                        </p>
-                    </div>
-
-                    <!-- Testimonial Card 3 -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300">
-                        <div class="flex items-center mb-6">
-                            <img src="images/client3.jpg" alt="Sarah Chen Photo" class="w-20 h-20 rounded-full object-cover mr-4 border-2 border-blue-500">
-                            <div class="text-left">
-                                <p class="text-xl font-semibold text-adaptive">Sarah Chen</p>
-                                <p class="text-gray-600 text-adaptive">ENT SPECIALIST, ACMH Hospital</p>
-                                <div class="flex mt-1">
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star-half-alt text-yellow-400"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-lg italic text-gray-700 text-adaptive leading-relaxed">
-                            "Jubayer's 3D modeling work was instrumental in visualizing our new diagnostic center. His precision and creativity helped us to make it."
-                        </p>
-                    </div>
-
-                    <!-- Testimonial Card 4 -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300">
-                        <div class="flex items-center mb-6">
-                            <img src="images/client 4.jpg" alt="David Lee Photo" class="w-20 h-20 rounded-full object-cover mr-4 border-2 border-blue-500">
-                            <div class="text-left">
-                                <p class="text-xl font-semibold text-adaptive">David Lee</p>
-                                <p class="text-gray-600 text-adaptive">Founder, BuildRight Co.</p>
-                                <div class="flex mt-1">
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-lg italic text-gray-700 text-adaptive leading-relaxed">
-                            "His CAD drawings were exceptionally detailed and accurate, streamlining our construction process significantly. A true professional in civil engineering."
-                        </p>
-                    </div>
+        <section id="resume" class="py-24 px-6 md:px-12 section-bg-light">
+            <div class="container mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">Experience</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-2 text-adaptive">Resume & Journey</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Resume Section -->
-        <section id="resume" class="py-16 px-6 md:px-12 section-bg-light">
-            <div class="container mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-4 text-adaptive">RESUME & EXPERIENCES</h2>
-                <p class="text-lg mb-12 text-gray-600 text-adaptive">Download my complete CV or explore my professional journey below.</p>
 
                 <!-- CV Download Button -->
-                <div class="mb-12">
-                    <a href="https://www.dropbox.com/scl/fi/a5ytaug4cprxoyygwfzko/JUBAYER-HOSSEN-RIFAT-CV.pdf?rlkey=m40njiobu8xsni7ld8bpj09jc&st=f2pdsayr&dl=0" target="_blank" class="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition duration-300 shadow-lg flex items-center justify-center mx-auto max-w-xs">
-                        <i class="fas fa-download mr-3"></i> Download CV (PDF)
+                <div class="text-center mb-16 reveal delay-100">
+                    <a href="#" class="inline-flex items-center bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 px-8 py-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300 shadow-lg">
+                        <i class="fas fa-download mr-3"></i> Download Complete CV
                     </a>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Education Box -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300">
-                        <h3 class="text-2xl font-semibold mb-6 text-blue-600">Education Qualifications</h3>
-                        <div class="text-left space-y-6 text-gray-700 text-adaptive">
-                            <div>
-                                <h4 class="text-xl font-semibold mb-1">Diploma in Civil Technology</h4>
-                                <p class="text-lg">CPI Management and Technology, Mirpur - 6, Dhaka</p>
-                                <p class="text-md text-gray-500">Result: 3.67 out of 4.00</p>
-                                <p class="text-md mt-2">Comprehensive study of structural engineering, construction management, and CAD software applications.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Education Timeline -->
+                    <div class="reveal-left delay-200">
+                        <div class="flex items-center mb-8">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl mr-4 shadow-sm">
+                                <i class="fas fa-graduation-cap"></i>
                             </div>
-                            <div>
-                                <h4 class="text-xl font-semibold mb-1">Secondary School Certificate</h4>
-                                <p class="text-lg">Baunia Abdul Jalil High School and College, Baunia, Uttara, Dhaka</p>
-                                <p class="text-md text-gray-500">Result: 4.50 Out of 5.00</p>
+                            <h3 class="text-2xl font-bold text-adaptive">Education</h3>
+                        </div>
+                        
+                        <div class="relative border-l-2 border-gray-200 dark:border-gray-700 ml-6 pl-8 space-y-10">
+                            <!-- Timeline Item 1 -->
+                            <div class="relative">
+                                <div class="absolute w-4 h-4 bg-blue-600 rounded-full -left-[41px] top-1 border-4 border-white dark:border-gray-800"></div>
+                                <span class="text-sm font-semibold text-blue-600 mb-1 block">2020 - 2024</span>
+                                <h4 class="text-xl font-bold text-adaptive mb-1">Diploma in Civil Engineering</h4>
+                                <p class="text-gray-500 text-sm mb-2 font-medium">CPI Management and Technology</p>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Focused on structural analysis, construction materials, and project management. Active participant in practical workshops.</p>
+                            </div>
+                            <!-- Timeline Item 2 -->
+                            <div class="relative">
+                                <div class="absolute w-4 h-4 bg-gray-300 dark:bg-gray-600 rounded-full -left-[41px] top-1 border-4 border-white dark:border-gray-800"></div>
+                                <span class="text-sm font-semibold text-gray-500 mb-1 block">2018 - 2020</span>
+                                <h4 class="text-xl font-bold text-adaptive mb-1">Secondary School Certificate</h4>
+                                <p class="text-gray-500 text-sm mb-2 font-medium">Local High School, Science Group</p>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Developed a strong foundation in mathematics and physics, sparking an interest in engineering.</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Key Achievements Box -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive hover:shadow-lg transition duration-300">
-                        <h3 class="text-2xl font-semibold mb-6 text-blue-600">Key Achievements</h3>
-                        <ul class="text-left space-y-4 text-gray-700 text-adaptive">
-                            <li class="flex items-start">
-                                <i class="fas fa-trophy text-yellow-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-semibold text-xl">Best Volunteer Award</h4>
-                                    <p class="text-lg">Annual Picnic at CPI Management and Technology (2025)</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-microscope text-blue-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-semibold text-xl">Civil Olympiad Participant</h4>
-                                    <p class="text-lg">IUBAT 2025 - Project showcase, quiz, and mechanics events</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-award text-green-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-semibold text-xl">TLD Project - 3rd Place</h4>
-                                    <p class="text-lg">Earthquake and Wind Load Resistance project</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-users text-indigo-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-semibold text-xl">CPI Civil Soft Club President</h4>
-                                    <p class="text-lg">Led club activities (2024–2025)</p>
-                                </div>
-                            </li>
-                        </ul>
+
+                    <!-- Experience Timeline -->
+                    <div class="reveal-right delay-300">
+                        <div class="flex items-center mb-8">
+                            <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xl mr-4 shadow-sm">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-adaptive">Experience & Leadership</h3>
+                        </div>
+                        
+                        <div class="relative border-l-2 border-gray-200 dark:border-gray-700 ml-6 pl-8 space-y-10">
+                            <!-- Timeline Item 1 -->
+                            <div class="relative">
+                                <div class="absolute w-4 h-4 bg-purple-600 rounded-full -left-[41px] top-1 border-4 border-white dark:border-gray-800"></div>
+                                <span class="text-sm font-semibold text-purple-600 mb-1 block">2022 - 2023</span>
+                                <h4 class="text-xl font-bold text-adaptive mb-1">President</h4>
+                                <p class="text-gray-500 text-sm mb-2 font-medium">CPI Civil Soft Club</p>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Led a team of students in organizing workshops on structural design software (AutoCAD, ETABS). Managed events and promoted technical skill development.</p>
+                            </div>
+                            <!-- Timeline Item 2 -->
+                            <div class="relative">
+                                <div class="absolute w-4 h-4 bg-gray-300 dark:bg-gray-600 rounded-full -left-[41px] top-1 border-4 border-white dark:border-gray-800"></div>
+                                <span class="text-sm font-semibold text-gray-500 mb-1 block">2021 - Present</span>
+                                <h4 class="text-xl font-bold text-adaptive mb-1">Freelance Visual Creator</h4>
+                                <p class="text-gray-500 text-sm mb-2 font-medium">Self-Employed</p>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Providing video editing, photo retouching, and 3D visualization services for various local clients and projects.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-16 px-6 md:px-12 section-bg-dark">
-            <div class="container mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-4 text-adaptive">Get In Touch</h2>
-                <p class="text-lg mb-12 text-gray-600 text-adaptive">Ready to collaborate? Let's discuss your next project or opportunity.</p>
+        <section id="contact" class="py-24 px-6 md:px-12 section-bg-dark">
+            <div class="container mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">Let's Connect</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-2 text-adaptive">Get In Touch</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+                    <p class="mt-6 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">Have a project in mind or want to collaborate? I'd love to hear from you.</p>
+                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-                    <!-- Contact Details -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive text-left">
-                        <h3 class="text-2xl font-semibold mb-6 text-blue-600">Contact Details</h3>
-                        <ul class="space-y-4 text-lg text-gray-700 text-adaptive">
-                            <li class="flex items-center">
-                                <i class="fas fa-envelope text-blue-600 mr-4 text-xl"></i>
-                                <span>jubayerhossenrifat36@gmail.com</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-phone-alt text-blue-600 mr-4 text-xl"></i>
-                                <span>+880 1782-428875</span> <!-- Placeholder, add your phone number -->
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-map-marker-alt text-blue-600 mr-4 text-xl"></i>
-                                <span>Dhaka, Bangladesh</span> <!-- Placeholder, add your location -->
-                            </li>
-                        </ul>
-                        <h3 class="text-2xl font-semibold mt-8 mb-4 text-blue-600">Connect With Me</h3>
-                        <div class="flex space-x-6">
-                            <a href="https://www.linkedin.com/in/jubayerhossenrifat" target="_blank" class="text-gray-600 hover:text-blue-600 transition duration-300 text-adaptive">
-                                <i class="fab fa-linkedin text-3xl"></i>
-                            </a>
-                            <a href="https://www.facebook.com/jubayerhossen.rifat1" target="_blank" class="text-gray-600 hover:text-blue-600 transition duration-300 text-adaptive">
-                                <i class="fab fa-facebook-square text-3xl"></i>
-                            </a>
-                            <a href="https://www.instagram.com/jubayerhossenrifat/" target="_blank" class="text-gray-600 hover:text-blue-600 transition duration-300 text-adaptive">
-                                <i class="fab fa-instagram-square text-3xl"></i>
-                            </a>
-                            <a href="mailto:jubayerhossenrifat36@gmail.com" class="text-gray-600 hover:text-blue-600 transition duration-300 text-adaptive">
-                                <i class="fas fa-envelope-square text-3xl"></i>
-                            </a>
+                <div class="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
+                    <!-- Contact Info -->
+                    <div class="lg:w-1/3 space-y-8 reveal-left delay-100">
+                        <div class="bg-adaptive p-8 rounded-2xl border border-adaptive shadow-adaptive flex flex-col items-center text-center hover:shadow-lg transition-shadow">
+                            <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center text-2xl text-blue-600 mb-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2 text-adaptive">Location</h4>
+                            <p class="text-gray-600 dark:text-gray-400">Dhaka, Bangladesh</p>
+                        </div>
+                        
+                        <div class="bg-adaptive p-8 rounded-2xl border border-adaptive shadow-adaptive flex flex-col items-center text-center hover:shadow-lg transition-shadow">
+                            <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center text-2xl text-blue-600 mb-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2 text-adaptive">Email</h4>
+                            <p class="text-gray-600 dark:text-gray-400">jubayer.rifat@example.com</p>
+                        </div>
+
+                        <div class="bg-adaptive p-8 rounded-2xl border border-adaptive shadow-adaptive flex flex-col items-center text-center hover:shadow-lg transition-shadow">
+                            <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center text-2xl text-blue-600 mb-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2 text-adaptive">Phone</h4>
+                            <p class="text-gray-600 dark:text-gray-400">+880 1234 567 890</p>
                         </div>
                     </div>
 
                     <!-- Contact Form -->
-                    <div class="bg-adaptive p-8 rounded-xl border border-adaptive shadow-adaptive">
-                        <h3 class="text-2xl font-semibold mb-6 text-blue-600 text-center">Send Me a Message</h3>
-                        <form action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST" class="space-y-6">
-                            <!-- IMPORTANT: Replace "https://formspree.io/f/mqalbzyk" with your actual Formspree form URL -->
-                            <div>
-                                <label for="name" class="block text-left text-sm font-medium text-gray-700 text-adaptive mb-1">Name</label>
-                                <input type="text" id="name" name="name" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-50 text-adaptive border-adaptive" placeholder="Your Name" required>
+                    <div class="lg:w-2/3 bg-adaptive p-8 md:p-10 rounded-2xl border border-adaptive shadow-adaptive reveal-right delay-200">
+                        <h3 class="text-2xl font-bold mb-6 text-adaptive">Send me a message</h3>
+                        <form action="#" method="POST" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Name</label>
+                                    <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-adaptive focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors" placeholder="John Doe" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Email</label>
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-adaptive focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors" placeholder="john@example.com" required>
+                                </div>
                             </div>
                             <div>
-                                <label for="email" class="block text-left text-sm font-medium text-gray-700 text-adaptive mb-1">Email</label>
-                                <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-50 text-adaptive border-adaptive" placeholder="your.email@example.com" required>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                                <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-adaptive focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors" placeholder="Project Inquiry" required>
                             </div>
                             <div>
-                                <label for="subject" class="block text-left text-sm font-medium text-gray-700 text-adaptive mb-1">Subject</label>
-                                <input type="text" id="subject" name="subject" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-50 text-adaptive border-adaptive" placeholder="Subject of your message" required>
+                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-adaptive focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none" placeholder="How can I help you?" required></textarea>
                             </div>
-                            <div>
-                                <label for="message" class="block text-left text-sm font-medium text-gray-700 text-adaptive mb-1">Message</label>
-                                <textarea id="message" name="message" rows="5" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-50 text-adaptive border-adaptive" placeholder="Your detailed message..." required></textarea>
-                            </div>
-                            <div>
-                                <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-md font-semibold hover:bg-blue-700 transition duration-300 shadow-md">Send Message</button>
-                            </div>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-3 md:py-4 px-6 rounded-lg font-bold hover:bg-blue-700 transition duration-300 shadow-md flex justify-center items-center">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -656,43 +852,50 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 section-bg-dark py-8 px-6 md:px-12 text-center text-adaptive">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-            <!-- About Footer Column -->
-            <div>
-                <h3 class="text-xl font-bold mb-4 text-adaptive">Jubayer Hossen Rifat</h3>
-                <p class="text-adaptive">Civil Engineer & Visual Creator</p>
-                <p class="mt-2 text-adaptive">Building tomorrow's infrastructure while crafting today's digital experiences.</p>
+    <footer class="bg-gray-900 text-white py-12 px-6 md:px-12 text-center md:text-left border-t border-gray-800">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            
+            <!-- Branding Column -->
+            <div class="flex flex-col items-center md:items-start">
+                <a href="#home" class="text-3xl font-bold text-white mb-4 tracking-tight">Jubayer Hossen <span class="text-blue-500">Rifat</span></a>
+                <p class="text-gray-400 mb-6 text-sm leading-relaxed max-w-sm">
+                    Combining civil engineering expertise with creative multimedia skills to deliver comprehensive solutions. Let's build and create together.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition duration-300"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gray-700 hover:text-white transition duration-300"><i class="fab fa-github"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-blue-400 hover:text-white transition duration-300"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-blue-800 hover:text-white transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                </div>
             </div>
 
             <!-- Quick Links Column -->
-            <div>
-                <h3 class="text-xl font-bold mb-4 text-adaptive">Quick Links</h3>
-                <ul class="space-y-2">
-                    <li><a href="#home" class="hover:text-blue-600 transition duration-300 text-adaptive">Home</a></li>
-                    <li><a href="#about" class="hover:text-blue-600 transition duration-300 text-adaptive">About</a></li>
-                    <li><a href="#projects" class="hover:text-blue-600 transition duration-300 text-adaptive">Projects</a></li>
-                    <li><a href="#testimonials" class="hover:text-blue-600 transition duration-300 text-adaptive">Testimonials</a></li>
-                    <li><a href="#resume" class="hover:text-blue-600 transition duration-300 text-adaptive">Resume</a></li>
-                    <li><a href="#contact" class="hover:text-blue-600 transition duration-300 text-adaptive">Contact</a></li>
+            <div class="flex flex-col items-center md:items-start">
+                <h3 class="text-lg font-bold mb-6 text-white uppercase tracking-wider">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a href="#home" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Home</a></li>
+                    <li><a href="#about" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> About</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Services</a></li>
+                    <li><a href="#projects" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Projects</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover:text-blue-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Contact</a></li>
                 </ul>
             </div>
 
             <!-- Services Column -->
-            <div>
-                <h3 class="text-xl font-bold mb-4 text-adaptive">Services</h3>
-                <ul class="space-y-2">
-                    <li><span class="text-adaptive">• Structural Design & Analysis</span></li>
-                    <li><span class="text-adaptive">• 3D Modeling & Visualization</span></li>
-                    <li><span class="text-adaptive">• Technical Drawing & CAD</span></li>
-                    <li><span class="text-adaptive">• Photo & Video Editing</span></li>
-                    <li><span class="text-adaptive">• Project Documentation</span></li>
+            <div class="flex flex-col items-center md:items-start">
+                <h3 class="text-lg font-bold mb-6 text-white uppercase tracking-wider">Services</h3>
+                <ul class="space-y-3">
+                    <li class="text-gray-400 flex items-center"><i class="fas fa-check text-blue-500 text-xs mr-2"></i> AutoCAD Drafting</li>
+                    <li class="text-gray-400 flex items-center"><i class="fas fa-check text-blue-500 text-xs mr-2"></i> Structural Analysis</li>
+                    <li class="text-gray-400 flex items-center"><i class="fas fa-check text-blue-500 text-xs mr-2"></i> 3D Visualization</li>
+                    <li class="text-gray-400 flex items-center"><i class="fas fa-check text-purple-500 text-xs mr-2"></i> Video Editing</li>
+                    <li class="text-gray-400 flex items-center"><i class="fas fa-check text-purple-500 text-xs mr-2"></i> Brand Design</li>
                 </ul>
             </div>
         </div>
-        <div class="mt-8 pt-8 border-t border-gray-700">
-            <p class="text-adaptive">&copy; <span id="current-year"></span> Jubayer Hossen Rifat. All rights reserved.</p>
+
+        <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+            <p class="text-gray-500 text-sm">&copy; <span id="current-year"></span> Jubayer Hossen Rifat. All rights reserved.</p>
         </div>
     </footer>
 
@@ -700,95 +903,125 @@
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const closeMobileMenuButton = document.getElementById('close-mobile-menu');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-        });
-
-        closeMobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-        });
-
-        // Close mobile menu when a link is clicked
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Theme Toggle Functionality
-        const themeToggle = document.getElementById('theme-toggle');
+        // --- Theme Toggle Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
 
-        // Check for saved theme preference or default to light
-        const savedTheme = localStorage.getItem('theme') || 'light-theme';
-        body.classList.add(savedTheme);
-        if (savedTheme === 'dark-theme') {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        } else {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
+        // Check for saved theme preference, otherwise use default (light)
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            body.classList.replace('light-theme', 'dark-theme');
+            document.documentElement.classList.add('dark'); // For Tailwind dark variants
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
         }
 
-        themeToggle.addEventListener('click', () => {
+        themeToggleBtn.addEventListener('click', () => {
             if (body.classList.contains('light-theme')) {
-                body.classList.remove('light-theme');
-                body.classList.add('dark-theme');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark-theme');
+                body.classList.replace('light-theme', 'dark-theme');
+                document.documentElement.classList.add('dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
             } else {
-                body.classList.remove('dark-theme');
-                body.classList.add('light-theme');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light-theme');
+                body.classList.replace('dark-theme', 'light-theme');
+                document.documentElement.classList.remove('dark');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
             }
         });
 
-        // Project Filtering Logic
+        // --- Mobile Menu Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        closeMobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        // --- Project Filtering Logic ---
         const filterButtons = document.querySelectorAll('.filter-button');
         const projectCards = document.querySelectorAll('.project-card');
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 // Remove active class from all buttons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to the clicked button
-                button.classList.add('active');
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                });
 
-                const filter = button.dataset.filter; // 'all', 'engineering', 'multimedia'
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Tailwind specific styling for active state
+                if(button.classList.contains('active')){
+                    button.classList.remove('bg-gray-200', 'text-gray-700', 'section-bg-light', 'text-adaptive');
+                    button.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+                }
+
+                const filterValue = button.getAttribute('data-filter');
 
                 projectCards.forEach(card => {
-                    const category = card.dataset.category;
-                    if (filter === 'all' || filter === category) {
-                        card.style.display = 'block'; // Show the card
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                        // Re-trigger animation slightly for visual feedback
+                        card.classList.remove('active');
+                        setTimeout(() => card.classList.add('active'), 50);
                     } else {
-                        card.style.display = 'none'; // Hide the card
+                        card.style.display = 'none';
                     }
                 });
             });
         });
 
-        // Set 'All Projects' as default active on load
-        document.querySelector('.filter-button[data-filter="all"]').click();
+        // --- Scroll Reveal Animation Logic (Intersection Observer) ---
+        // Using Intersection Observer is much more performant than listening to the scroll event
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+        const revealOptions = {
+            threshold: 0.15, // Trigger when 15% of the element is visible
+            rootMargin: "0px 0px -50px 0px" // Trigger slightly before it hits the bottom
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Stop observing once revealed
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
+
+        // Change header style on scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+                header.classList.remove('py-4');
+                header.classList.add('py-2');
+            } else {
+                header.classList.remove('shadow-lg');
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+        });
+
     </script>
 </body>
 </html>
